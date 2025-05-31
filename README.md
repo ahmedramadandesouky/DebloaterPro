@@ -59,6 +59,26 @@ DebloaterPro is a comprehensive Windows optimization tool that helps you remove 
 
 ## Screenshots
 
+### Screenshot 1
+[![Screenshot 1](Screenshots/Screenshot%20(1).png)](Screenshots/Screenshot%20(1).png)
+
+### Screenshot 2
+[![Screenshot 2](Screenshots/Screenshot%20(2).png)](Screenshots/Screenshot%20(2).png)
+
+### Screenshot 3
+[![Screenshot 3](Screenshots/Screenshot%20(3).png)](Screenshots/Screenshot%20(3).png)
+
+### Screenshot 4
+[![Screenshot 4](Screenshots/Screenshot%20(4).png)](Screenshots/Screenshot%20(4).png)
+
+### Screenshot 5
+[![Screenshot 5](Screenshots/Screenshot%20(5).png)](Screenshots/Screenshot%20(5).png)
+
+### Screenshot 6
+[![Screenshot 6](Screenshots/Screenshot%20(6).png)](Screenshots/Screenshot%20(6).png)
+
+### Screenshot 7
+[![Screenshot 7](Screenshots/Screenshot%20(7).png)](Screenshots/Screenshot%20(7).png)
 
 ## Contributing
 
