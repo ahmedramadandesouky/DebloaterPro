@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.Tweaks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:DebloaterPro.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style BasedOn="{StaticResource AccentButtonStyle}" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <StackPanel Padding="20" Spacing="20">
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="System Tweaks" />
+            <!--  One-Click Actions  -->
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                BorderThickness="1"
+                CornerRadius="12">
+                <StackPanel Spacing="10">
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="One-Click Optimization" />
+                    <TextBlock Text="Apply multiple optimizations with a single click." TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Click="ApplyPerformanceTweaks_Click" Content="Apply Performance Tweaks" />
+                        <Button Click="ApplyPrivacyTweaks_Click" Content="Apply Privacy Tweaks" />
+                        <Button Click="RestoreDefaults_Click" Content="Restore Defaults" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!--  Performance Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="Performance Tweaks" />
+            <StackPanel Spacing="12">
+                <!--  Disable Hibernation  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Hibernation" />
+                        <TextBlock Text="Controls whether the system saves memory to disk when hibernating." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                x:Name="DisableHibernateBtn"
+                                Click="ToggleHibernate_Click"
+                                Content="Disable" />
+                            <Button
+                                x:Name="EnableHibernateBtn"
+                                Click="ToggleHibernate_Click"
+                                Content="Enable" />
+                            <Button Click="CheckHibernateStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="HibernateStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Disable Prefetch & Superfetch  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Prefetch &amp; Superfetch (SysMain)" />
+                        <TextBlock Text="Controls services that preload apps into memory for faster launch." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                x:Name="DisableSuperfetchBtn"
+                                Click="ToggleSuperfetch_Click"
+                                Content="Disable" />
+                            <Button
+                                x:Name="EnableSuperfetchBtn"
+                                Click="ToggleSuperfetch_Click"
+                                Content="Enable" />
+                            <Button Click="CheckSuperfetchStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="SuperfetchStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Set Power Plan  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Power Plans" />
+                        <TextBlock Text="Change system power management behavior for performance or efficiency." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="SetPowerPlan_Click"
+                                Content="Ultimate Performance"
+                                Tag="e9a42b02-d5df-448d-aa00-03f14749eb61" />
+                            <Button
+                                Click="SetPowerPlan_Click"
+                                Content="High Performance"
+                                Tag="8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c" />
+                            <Button
+                                Click="SetPowerPlan_Click"
+                                Content="Balanced"
+                                Tag="381b4222-f694-41f0-9685-ff5bb260df2e" />
+                            <Button
+                                Click="SetPowerPlan_Click"
+                                Content="Power Saver"
+                                Tag="a1841308-3541-4fab-bc81-f71556f20b4a" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="PowerPlanStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Disable Game Bar  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Game Bar &amp; Game Mode" />
+                        <TextBlock Text="Disable gaming-related features to save system resources." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleGameBar_Click"
+                                Content="Disable Game Bar"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleGameBar_Click"
+                                Content="Enable Game Bar"
+                                Tag="enable" />
+                            <Button Click="CheckGameBarStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="GameBarStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  UI Customization Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="UI Customization" />
+            <StackPanel Spacing="12">
+                <!--  Disable Windows Tips  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Windows Tips &amp; Ads" />
+                        <TextBlock Text="Disable suggestions, tips, and ads in Start Menu and elsewhere." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleTips_Click"
+                                Content="Disable Tips"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleTips_Click"
+                                Content="Enable Tips"
+                                Tag="enable" />
+                            <Button Click="CheckTipsStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="TipsStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Taskbar Tweaks  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Taskbar Customization" />
+                        <TextBlock Text="Modify taskbar behavior and appearance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleTaskbarSearch_Click"
+                                Content="Disable Search"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleTaskbarSearch_Click"
+                                Content="Enable Search"
+                                Tag="enable" />
+                            <Button
+                                Click="ToggleTaskbarSize_Click"
+                                Content="Small Icons"
+                                Tag="small" />
+                            <Button
+                                Click="ToggleTaskbarSize_Click"
+                                Content="Large Icons"
+                                Tag="large" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="TaskbarStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Explorer Tweaks  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="File Explorer Tweaks" />
+                        <TextBlock Text="Customize File Explorer behavior and appearance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleFileExplorerOption_Click"
+                                Content="Show Extensions"
+                                Tag="ShowExtensions" />
+                            <Button
+                                Click="ToggleFileExplorerOption_Click"
+                                Content="Show Hidden Files"
+                                Tag="ShowHidden" />
+                            <Button
+                                Click="ToggleFileExplorerOption_Click"
+                                Content="Compact View"
+                                Tag="CompactMode" />
+                            <Button
+                                Click="ToggleFileExplorerOption_Click"
+                                Content="Details View"
+                                Tag="DetailsView" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="ExplorerStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  System Services Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="System Services" />
+            <StackPanel Spacing="12">
+                <!--  Disable Xbox Services  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Xbox Services" />
+                        <TextBlock Text="Disable Xbox-related services if you don't use them." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleXboxServices_Click"
+                                Content="Disable Xbox Services"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleXboxServices_Click"
+                                Content="Enable Xbox Services"
+                                Tag="enable" />
+                            <Button Click="CheckXboxServicesStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="XboxServicesStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Disable Background Apps  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Background Apps" />
+                        <TextBlock Text="Control which apps can run in the background." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleBackgroundApps_Click"
+                                Content="Disable Background Apps"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleBackgroundApps_Click"
+                                Content="Enable Background Apps"
+                                Tag="enable" />
+                            <Button Click="CheckBackgroundAppsStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="BackgroundAppsStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Disable Cortana  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Cortana" />
+                        <TextBlock Text="Disable Cortana voice assistant and search features." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleCortana_Click"
+                                Content="Disable Cortana"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleCortana_Click"
+                                Content="Enable Cortana"
+                                Tag="enable" />
+                            <Button Click="CheckCortanaStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="CortanaStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Windows Update  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Windows Update" />
+                        <TextBlock Text="Control Windows Update behavior and delivery optimization." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleWindowsUpdate_Click"
+                                Content="Disable Auto Updates"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleWindowsUpdate_Click"
+                                Content="Enable Auto Updates"
+                                Tag="enable" />
+                            <Button
+                                Click="ToggleWindowsUpdateP2P_Click"
+                                Content="Disable P2P Updates"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleWindowsUpdateP2P_Click"
+                                Content="Enable P2P Updates"
+                                Tag="enable" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="WindowsUpdateStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  Network Tweaks  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="Network Tweaks" />
+            <StackPanel Spacing="12">
+                <!--  DNS Settings  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="DNS Configuration" />
+                        <TextBlock Text="Change DNS servers for better privacy/performance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="SetDNSServer_Click"
+                                Content="Cloudflare (1.1.1.1)"
+                                Tag="1.1.1.1,1.0.0.1" />
+                            <Button
+                                Click="SetDNSServer_Click"
+                                Content="Google (8.8.8.8)"
+                                Tag="8.8.8.8,8.8.4.4" />
+                            <Button
+                                Click="SetDNSServer_Click"
+                                Content="OpenDNS"
+                                Tag="208.67.222.222,208.67.220.220" />
+                            <Button Click="ResetDNSServer_Click" Content="Reset to Default" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="DNSStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Network Throttling  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Network Throttling" />
+                        <TextBlock Text="Disable network throttling for better performance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="ToggleNetworkThrottling_Click"
+                                Content="Disable Throttling"
+                                Tag="disable" />
+                            <Button
+                                Click="ToggleNetworkThrottling_Click"
+                                Content="Enable Throttling"
+                                Tag="enable" />
+                            <Button Click="CheckNetworkThrottlingStatus_Click" Content="Check Status" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="NetworkThrottlingStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

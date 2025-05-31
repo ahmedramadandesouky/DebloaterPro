@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.Debloater"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:DebloaterPro.Converters"
+    xmlns:local="using:DebloaterPro.Pages">
+
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:VersionToStringConverter x:Key="VersionToStringConverter" />
+        <converters:CriticalToBrushConverter x:Key="CriticalToBrushConverter" />
+        <converters:RiskLevelToBrushConverter x:Key="RiskLevelToBrushConverter" />
+        <Style BasedOn="{StaticResource AccentButtonStyle}" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+    </Page.Resources>
+
+    <Grid
+        Padding="20"
+        RowDefinitions="Auto, Auto, *"
+        RowSpacing="16">
+
+        <TextBlock
+            Grid.Row="0"
+            FontSize="28"
+            FontWeight="SemiBold"
+            Text="Remove Preinstalled Apps" />
+
+        <StackPanel
+            Grid.Row="1"
+            Padding="10"
+            Background="{ThemeResource CardBackgroundFillColorDefault}"
+            BorderBrush="{ThemeResource CardStrokeColorDefault}"
+            BorderThickness="1"
+            CornerRadius="12"
+            Orientation="Vertical">
+
+            <TextBox
+                x:Name="SearchBox"
+                PlaceholderText="Search installed apps..."
+                TextChanged="SearchBox_TextChanged" />
+
+            <StackPanel
+                Margin="0,5"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="10">
+                <ComboBox
+                    x:Name="RiskFilterCombo"
+                    Width="200"
+                    VerticalAlignment="Center"
+                    PlaceholderText="Filter by Risk Level"
+                    SelectionChanged="RiskFilterCombo_SelectionChanged">
+                    <ComboBoxItem Content="All" Tag="All" />
+                    <ComboBoxItem Content="Recommended" Tag="Recommended" />
+                    <ComboBoxItem Content="Critical" Tag="Critical" />
+                    <ComboBoxItem Content="Dangerous" Tag="Dangerous" />
+                </ComboBox>
+
+                <Button Click="SelectRecommended_Click" Content="Select Recommended" />
+                <Button Click="SelectLTSCStyle_Click" Content="Select LTSC Style" />
+                <Button Click="Refresh_Click" Content="Refresh List" />
+                <Button Click="RemoveSelectedApps_Click" Content="Remove Selected Apps" />
+            </StackPanel>
+            <ProgressBar
+                x:Name="ProgressBar"
+                Grid.Row="4"
+                Maximum="100"
+                Minimum="0"
+                Visibility="Collapsed" />
+        </StackPanel>
+
+        <ListView
+            x:Name="AppListView"
+            Grid.Row="2"
+            Padding="10"
+            Background="{ThemeResource CardBackgroundFillColorDefault}"
+            BorderBrush="{ThemeResource CardStrokeColorDefault}"
+            BorderThickness="1"
+            CornerRadius="12"
+            ItemsSource="{x:Bind FilteredApps}"
+            SelectionMode="Multiple">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:AppEntry">
+                    <StackPanel
+                        Padding="5"
+                        Orientation="Vertical"
+                        Spacing="4">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="{x:Bind RiskLevel, Converter={StaticResource RiskLevelToBrushConverter}}"
+                            Text="{x:Bind DisplayName}" />
+                        <TextBlock
+                            FontSize="12"
+                            Opacity="0.6"
+                            Text="{x:Bind PackageFullName}" />
+                        <TextBlock
+                            FontSize="12"
+                            Opacity="0.7"
+                            Text="{x:Bind Description}" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock
+                                Foreground="Red"
+                                Text="🔥 Recommended"
+                                Visibility="{x:Bind IsRecommended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock
+                                Foreground="DarkGoldenrod"
+                                Text="⚠️ Critical"
+                                Visibility="{x:Bind RiskLevel, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock
+                                FontSize="12"
+                                Opacity="0.5"
+                                Text="{x:Bind Version, Converter={StaticResource VersionToStringConverter}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ProgressRing
+            x:Name="LoadingIndicator"
+            Grid.Row="2"
+            Width="40"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsActive="False" />
+    </Grid>
+</Page>

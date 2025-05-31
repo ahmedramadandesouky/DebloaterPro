@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DebloaterPro (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DebloaterPro (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.WindowsServices"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:converters="using:DebloaterPro.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:DebloaterPro.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ToggleValueConverter x:Key="ToggleValueConverter" />
+
+        <DataTemplate x:Key="ServiceFeatureTemplate" x:DataType="local:ServiceFeature">
+            <Grid
+                Padding="12"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                ColumnDefinitions="*, Auto"
+                CornerRadius="8">
+
+                <StackPanel>
+                    <TextBlock
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Text="{x:Bind Title, Mode=OneWay}" />
+                    <TextBlock
+                        Margin="0,4,0,8"
+                        FontSize="12"
+                        Opacity="0.8"
+                        Text="{x:Bind Description, Mode=OneWay}"
+                        TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <TextBlock FontWeight="SemiBold" Text="Status:" />
+                        <TextBlock Foreground="{x:Bind StatusColor, Mode=OneWay}" Text="{x:Bind StatusText, Mode=OneWay}" />
+                        <TextBlock
+                            Margin="8,0,0,0"
+                            FontWeight="SemiBold"
+                            Text=" | Startup:" />
+                        <TextBlock Foreground="{x:Bind StartupColor, Mode=OneWay}" Text="{x:Bind StartupText, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <Button
+                        Click="ShowInfo_Click"
+                        Content="Info"
+                        DataContext="{x:Bind}"
+                        Style="{StaticResource AccentButtonStyle}" />
+                    <Button
+                        Click="ToggleService_Click"
+                        Content="{x:Bind ToggleLabel, Mode=OneWay}"
+                        DataContext="{x:Bind}"
+                        Style="{StaticResource AccentButtonStyle}" />
+                    <ComboBox
+                        Width="120"
+                        DisplayMemberPath="Value"
+                        ItemsSource="{x:Bind StartupTypes}"
+                        SelectedValuePath="Key"
+                        SelectionChanged="StartupTypeComboBox_SelectionChanged" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid
+        x:Name="MainGrid"
+        Padding="20"
+        RowDefinitions="Auto, Auto, *">
+
+        <TextBlock
+            Margin="0,0,0,20"
+            FontSize="28"
+            FontWeight="SemiBold"
+            Text="Service Controls" />
+
+        <TextBox
+            x:Name="SearchBox"
+            Grid.Row="1"
+            Margin="0,0,0,10"
+            PlaceholderText="Search services..."
+            TextChanged="SearchBox_TextChanged" />
+
+        <Grid Grid.Row="2">
+            <ListView
+                x:Name="ServiceFeaturesListView"
+                ItemTemplate="{StaticResource ServiceFeatureTemplate}"
+                ItemsSource="{x:Bind FilteredServiceFeatures}"
+                SelectionMode="None">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0,0,0,10" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+
+        <controls:ContentDialog
+            x:Name="InfoDialog"
+            Title="Information"
+            CloseButtonText="Close"
+            DefaultButton="Close" />
+    </Grid>
+</Page>

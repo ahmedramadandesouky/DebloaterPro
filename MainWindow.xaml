@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Window
+    x:Class="DebloaterPro.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DebloaterPro"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls">
+
+    <Grid>
+        <!--  InfoBar  -->
+        <InfoBar
+            x:Name="MainInfoBar"
+            Title="Notification"
+            Margin="8"
+            Canvas.ZIndex="10"
+            IsOpen="False"
+            Message="Message Text"
+            Severity="Informational" />
+
+        <!--  NavigationView  -->
+        <winui:NavigationView
+            x:Name="NavView"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Left"
+            SelectionChanged="NavView_SelectionChanged">
+
+            <winui:NavigationView.MenuItems>
+                <winui:NavigationViewItem
+                    x:Name="DashboardItem"
+                    Content="Dashboard"
+                    Icon="Home"
+                    Tag="DashboardPage" />
+                <winui:NavigationViewItem
+                    x:Name="DebloaterItem"
+                    Content="Debloater"
+                    Icon="Delete"
+                    Tag="DebloaterPage" />
+                <winui:NavigationViewItem
+                    Content="System Tweaks"
+                    Icon="Setting"
+                    Tag="TweaksPage" />
+                <winui:NavigationViewItem Content="Privacy" Tag="PrivacyPage">
+                    <winui:NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="SetLockScreen" />
+                    </winui:NavigationViewItem.Icon>
+                </winui:NavigationViewItem>
+                <winui:NavigationViewItem
+                    Content="Services"
+                    Icon="DisableUpdates"
+                    Tag="WindowsServicesPage" />
+                <winui:NavigationViewItem
+                    Content="Tools"
+                    Icon="Repair"
+                    Tag="ToolsPage" />
+            </winui:NavigationView.MenuItems>
+
+            <winui:NavigationView.FooterMenuItems>
+                <winui:NavigationViewItem
+                    Content="About"
+                    Icon="Help"
+                    Tag="AboutPage" />
+            </winui:NavigationView.FooterMenuItems>
+
+            <Frame x:Name="ContentFrame" />
+        </winui:NavigationView>
+    </Grid>
+</Window>

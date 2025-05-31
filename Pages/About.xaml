@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:DebloaterPro.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style BasedOn="{StaticResource AccentButtonStyle}" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer Padding="20">
+        <StackPanel Spacing="15">
+            <!--  Header  -->
+            <StackPanel
+                Padding="10"
+                HorizontalAlignment="Center"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Spacing="10">
+                <Image
+                    Width="100"
+                    Height="100"
+                    Source="/Assets/DebloaterPro.png" />
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Text="DebloaterPro"
+                    TextAlignment="Center" />
+                <TextBlock
+                    x:Name="AppVersionTextBlock"
+                    FontSize="16"
+                    TextAlignment="Center" />
+                <TextBlock
+                    FontStyle="Italic"
+                    Foreground="Gray"
+                    Text="Comprehensive Windows Optimization Tool"
+                    TextAlignment="Center" />
+            </StackPanel>
+
+            <!--  Features  -->
+            <StackPanel
+                Padding="10"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                BorderThickness="1"
+                CornerRadius="12">
+                <!--  Description  -->
+                <TextBlock Text="DebloaterPro is an all-in-one solution to optimize your Windows experience by removing bloatware, enhancing privacy, and applying system tweaks." TextWrapping="Wrap" />
+                <TextBlock
+                    Margin="0,10,0,5"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Text="Key Features:" />
+                <TextBlock Text="🗑️ Debloater: Remove pre-installed apps by risk level (Safe, Moderate, Critical)." TextWrapping="Wrap" />
+                <TextBlock Text="🔒 Privacy: Disable telemetry, diagnostics, and control app permissions." TextWrapping="Wrap" />
+                <TextBlock Text="⚙️ Services: Configure services safely and optimize background tasks." TextWrapping="Wrap" />
+                <TextBlock Text="🛠️ Tools: Maintenance tasks including temp cleanup, SFC, and disk tools." TextWrapping="Wrap" />
+                <TextBlock Text="🎛️ Tweaks: Performance and privacy optimizations with one-click presets." TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!--  Links  -->
+            <StackPanel
+                Padding="10"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                BorderThickness="1"
+                CornerRadius="12">
+                <!--  Disclaimer  -->
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Disclaimer:" />
+                <TextBlock
+                    Margin="0,0,0,20"
+                    Foreground="DarkRed"
+                    Text="This software is provided as-is. The developers are not responsible for any damage or data loss. Please use responsibly."
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Text="Resources:" />
+                <TextBlock>
+                    <Run Text="GitHub: " />
+                    <Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/MEHDIMYADI">MEHDIMYADI</Hyperlink>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Project Page: " />
+                    <Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/MEHDIMYADI/DebloaterPro">DebloaterPro</Hyperlink>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="License: " />
+                    <Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/MEHDIMYADI/DebloaterPro/blob/main/LICENSE">MIT License</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

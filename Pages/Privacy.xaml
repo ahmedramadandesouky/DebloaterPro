@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.Privacy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:converters="using:DebloaterPro.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:DebloaterPro.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ToggleValueConverter x:Key="ToggleValueConverter" />
+
+        <Style BasedOn="{StaticResource AccentButtonStyle}" TargetType="Button">
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+
+        <DataTemplate x:Key="PrivacyFeatureTemplate" x:DataType="local:PrivacyFeature">
+            <Grid
+                Padding="12"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                ColumnDefinitions="*, Auto"
+                CornerRadius="8">
+
+                <StackPanel>
+                    <TextBlock
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Text="{x:Bind Title}" />
+                    <TextBlock
+                        Margin="0,4,0,8"
+                        FontSize="12"
+                        Opacity="0.8"
+                        Text="{x:Bind Description}"
+                        TextWrapping="Wrap" />
+
+                    <StackPanel
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Text="{x:Bind StatusIcon}" />
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            Foreground="{x:Bind StatusColor}"
+                            Text="{x:Bind StatusText}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        Click="ShowInfo_Click"
+                        Content="Info"
+                        DataContext="{x:Bind}" />
+                    <Button
+                        Click="ToggleFeature_Click"
+                        Content="{x:Bind CurrentValue, Converter={StaticResource ToggleValueConverter}}"
+                        DataContext="{x:Bind}"
+                        ToolTipService.ToolTip="Toggle this setting" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid x:Name="MainGrid" Padding="20">
+        <ScrollViewer>
+            <StackPanel Spacing="20">
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Privacy &amp; Telemetry Controls" />
+
+                <!--  One-Click Actions  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Quick Actions" />
+                        <TextBlock Text="Apply multiple privacy settings at once" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                x:Name="ApplyRecommendedButton"
+                                Click="ApplyRecommendedSettings_Click"
+                                Content="Apply Recommended Privacy Settings"
+                                Style="{StaticResource AccentButtonStyle}" />
+                            <Button
+                                Click="RestoreDefaultSettings_Click"
+                                Content="Restore Defaults"
+                                Style="{StaticResource AccentButtonStyle}" />
+                        </StackPanel>
+                        <ProgressBar
+                            x:Name="ProgressBar"
+                            VerticalAlignment="Center"
+                            IsIndeterminate="False"
+                            Visibility="Collapsed" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Telemetry Section  -->
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Telemetry &amp; Data Collection" />
+                <ListView
+                    x:Name="TelemetryListView"
+                    ItemTemplate="{StaticResource PrivacyFeatureTemplate}"
+                    ItemsSource="{x:Bind TelemetryFeatures}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0,0,0,10" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <!--  Activity History Section  -->
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Activity History &amp; Timeline" />
+                <ListView
+                    x:Name="ActivityHistoryListView"
+                    ItemTemplate="{StaticResource PrivacyFeatureTemplate}"
+                    ItemsSource="{x:Bind ActivityHistoryFeatures}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0,0,0,10" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <!--  Location & Sensors Section  -->
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Location &amp; Sensors" />
+                <ListView
+                    x:Name="LocationSensorsListView"
+                    ItemTemplate="{StaticResource PrivacyFeatureTemplate}"
+                    ItemsSource="{x:Bind LocationSensorsFeatures}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0,0,0,10" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <!--  Diagnostics & Feedback Section  -->
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Diagnostics &amp; Feedback" />
+                <ListView
+                    x:Name="DiagnosticsListView"
+                    ItemTemplate="{StaticResource PrivacyFeatureTemplate}"
+                    ItemsSource="{x:Bind DiagnosticsFeatures}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0,0,0,10" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <!--  App Permissions Section  -->
+                <TextBlock
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="App Permissions" />
+                <ListView
+                    x:Name="AppPermissionsListView"
+                    ItemTemplate="{StaticResource PrivacyFeatureTemplate}"
+                    ItemsSource="{x:Bind AppPermissionsFeatures}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0,0,0,10" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+        <controls:ContentDialog
+            x:Name="InfoDialog"
+            Title="Information"
+            CloseButtonText="Close"
+            DefaultButton="Close" />
+    </Grid>
+</Page>

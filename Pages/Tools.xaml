@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="DebloaterPro.Pages.Tools"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:DebloaterPro.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style BasedOn="{StaticResource AccentButtonStyle}" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="12,4" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <StackPanel Padding="20" Spacing="20">
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="Advanced Tools" />
+            <!--  One-Click Actions  -->
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                BorderThickness="1"
+                CornerRadius="12">
+                <StackPanel Spacing="10">
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="Quick Actions" />
+                    <TextBlock Text="Common system operations and maintenance tasks." TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Click="RestartExplorer_Click" Content="Restart Explorer" />
+                        <Button Click="FlushDns_Click" Content="Flush DNS Cache" />
+                        <Button Click="ResetNetwork_Click" Content="Reset Network" />
+                        <Button Click="CleanRecycleBin_Click" Content="Clean Recycle Bin" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!--  System Maintenance Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="System Maintenance" />
+            <StackPanel Spacing="12">
+                <!--  Disk Cleanup  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Disk Cleanup" />
+                        <TextBlock Text="Clean up temporary files and system cache to free up disk space." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="ClearTemp_Click" Content="Clean Temp Files" />
+                            <Button Click="CleanSystemFiles_Click" Content="Clean System Files" />
+                            <Button Click="CleanWindowsUpdate_Click" Content="Clean Windows Update" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!--  Disk Defrag  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Disk Optimization" />
+                        <TextBlock Text="Optimize and defragment your drives for better performance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="AnalyzeDrives_Click" Content="Analyze Drives" />
+                            <Button Click="OptimizeDrives_Click" Content="Optimize Drives" />
+                            <ComboBox
+                                x:Name="DriveComboBox"
+                                Width="120"
+                                Margin="10,0,0,0" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="DiskOptimizationStatus"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+
+                <!--  System File Checker  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="System File Checker" />
+                        <TextBlock Text="Scan and repair corrupted system files." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="ScanSystemFiles_Click" Content="Scan System Files" />
+                            <Button Click="RepairSystemFiles_Click" Content="Repair System Files" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="SfcStatusText"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  Windows Customization Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="Windows Customization" />
+            <StackPanel Spacing="12">
+                <!--  Context Menu Editor  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Context Menu Editor" />
+                        <TextBlock Text="Manage items in Windows right-click context menus." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="EditFileContextMenu_Click" Content="Edit File Context Menu" />
+                            <Button Click="EditDesktopContextMenu_Click" Content="Edit Desktop Context Menu" />
+                            <Button Click="ResetContextMenus_Click" Content="Reset Context Menus" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!--  Windows Features  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Windows Features" />
+                        <TextBlock Text="Enable or disable optional Windows features." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="OpenFeaturesDialog_Click" Content="Open Features Dialog" />
+                            <Button Click="ListInstalledFeatures_Click" Content="List Installed Features" />
+                        </StackPanel>
+                        <TextBox
+                            x:Name="FeaturesTextBox"
+                            Height="100"
+                            Margin="0,10,0,0"
+                            AcceptsReturn="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Windows Explorer Customization  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Explorer Customization" />
+                        <TextBlock Text="Customize File Explorer appearance and behavior." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button
+                                Click="SetExplorerTheme_Click"
+                                Content="Dark Mode"
+                                Tag="Dark" />
+                            <Button
+                                Click="SetExplorerTheme_Click"
+                                Content="Light Mode"
+                                Tag="Light" />
+                            <Button
+                                Click="ToggleExplorerRibbon_Click"
+                                Content="Show Ribbon"
+                                Tag="Show" />
+                            <Button
+                                Click="ToggleExplorerRibbon_Click"
+                                Content="Hide Ribbon"
+                                Tag="Hide" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="ExplorerCustomizationStatus"
+                            Margin="0,5,0,0"
+                            FontSize="12" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  Advanced Tools Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="Advanced Tools" />
+            <StackPanel Spacing="12">
+                <!--  Registry Editor  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Registry Tools" />
+                        <TextBlock Text="Advanced registry editing and maintenance." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="BackupRegistry_Click" Content="Backup Registry" />
+                            <Button Click="OpenRegistryEditor_Click" Content="Open Registry Editor" />
+                            <Button Click="ScanRegistryErrors_Click" Content="Scan Registry Errors" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!--  Task Scheduler  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Task Scheduler" />
+                        <TextBlock Text="Manage scheduled tasks and automatic operations." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="OpenTaskScheduler_Click" Content="Open Task Scheduler" />
+                            <Button Click="DisableMicrosoftTasks_Click" Content="Disable Microsoft Tasks" />
+                            <Button Click="ListAllTasks_Click" Content="List All Tasks" />
+                        </StackPanel>
+                        <TextBox
+                            x:Name="TasksTextBox"
+                            Height="100"
+                            Margin="0,10,0,0"
+                            AcceptsReturn="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Group Policy Editor  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Group Policy" />
+                        <TextBlock Text="Edit group policy settings (Windows Pro/Enterprise only)." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="OpenGroupPolicy_Click" Content="Open Group Policy" />
+                            <Button Click="ExportPolicies_Click" Content="Export Policies" />
+                            <Button Click="ResetPolicies_Click" Content="Reset Policies" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  System Information Section  -->
+            <TextBlock
+                FontSize="28"
+                FontWeight="SemiBold"
+                Text="System Information" />
+            <StackPanel Spacing="12">
+                <!--  System Report  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="System Report" />
+                        <TextBlock Text="Generate detailed reports about your system configuration." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="GenerateQuickReport_Click" Content="Quick Report" />
+                            <Button Click="GenerateDetailedReport_Click" Content="Detailed Report" />
+                            <Button Click="ExportReport_Click" Content="Export Report" />
+                        </StackPanel>
+                        <TextBox
+                            x:Name="ReportTextBox"
+                            Height="150"
+                            Margin="0,10,0,0"
+                            AcceptsReturn="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </Border>
+
+                <!--  Hardware Information  -->
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefault}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefault}"
+                    BorderThickness="1"
+                    CornerRadius="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Text="Hardware Info" />
+                        <TextBlock Text="View detailed information about your hardware components." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="ShowCpuInfo_Click" Content="CPU Info" />
+                            <Button Click="ShowGpuInfo_Click" Content="GPU Info" />
+                            <Button Click="ShowRamInfo_Click" Content="RAM Info" />
+                            <Button Click="ShowDiskInfo_Click" Content="Disk Info" />
+                        </StackPanel>
+                        <TextBox
+                            x:Name="HardwareInfoTextBox"
+                            Height="150"
+                            Margin="0,10,0,0"
+                            AcceptsReturn="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
